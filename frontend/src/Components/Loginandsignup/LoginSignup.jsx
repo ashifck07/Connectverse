@@ -135,12 +135,10 @@ const LoginSignup = () => {
 
   return (
     <div>
-      {/* Include Navbar at the top */}
       <Navbar />
 
-      {/* Main content area with a solid black background */}
       <div className="bg-black min-h-screen flex items-center justify-center">
-        {!showForm ? ( // Show button to reveal the form
+        {!showForm ? ( 
           <button
             onClick={showLoginForm}
             className="bg-white text-black px-8 py-4 rounded-lg"

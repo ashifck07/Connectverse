@@ -27,10 +27,9 @@ exports.handleForgotPassword = async (email) => {
 
     return 'Password reset link sent to your email';
 };
-// changes is to done byt cha
+
 exports.handleResetPassword = async (resetToken, newPassword) => {
     try {
-      // Log the received token for debugging
       console.log("Received reset token:", resetToken);
       console.log("Current time:", new Date().toISOString());
   
@@ -46,7 +45,6 @@ exports.handleResetPassword = async (resetToken, newPassword) => {
         throw new Error("Invalid or expired token");
       }
   
-      // Log the user's details for debugging (you may remove this in production)
       console.log("User found:", user.email);
   
       // Hash the new password
@@ -57,43 +55,17 @@ exports.handleResetPassword = async (resetToken, newPassword) => {
       user.resetToken = undefined;
       user.resetTokenExpiry = undefined;
   
-      // Save the user document with updated information
       await user.save();
   
       console.log("Password has been successfully reset for user:", user.email);
       return "Password has been reset successfully";
     } catch (error) {
-      // Improved error logging
       console.error("Error in handleResetPassword:", error.message);
       throw new Error("Password reset failed due to an invalid or expired token");
     }
   };
   
 
-
-// old code 
-// exports.handleResetPassword = async (resetToken, newPassword) => {
-//   try {
-   
-//       const user = await User.findOne({
-//           resetToken,
-//           resetTokenExpiry: { $gt: Date.now() } 
-//       });
-//       if (!user) throw new Error('Invalid or expired token');
-//       const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-//       user.password = hashedPassword;
-//       user.resetToken = undefined; 
-//       user.resetTokenExpiry = undefined; 
-
-//       await user.save();
-
-//       return 'Password has been reset';
-//   } catch (error) {
-//       console.error('Error in handleResetPassword:', error);
-//       throw new Error('Password reset failed');
-//   }
-// };
 
 
 

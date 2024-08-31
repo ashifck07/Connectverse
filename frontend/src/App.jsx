@@ -11,10 +11,8 @@ function App() {
     <Router>
       <div className="min-h-screen bg-black">
         {" "}
-        {/* Set a background color for the entire app */}
         <div className="container mx-auto px-4 py-8">
           {" "}
-          {/* Tailwind container with padding */}
           <Routes>
             <Route path="/forgot-password" element={<Forgotpassword />} />
             <Route path="/reset-password/:token" element={<ResetPassword />} />
